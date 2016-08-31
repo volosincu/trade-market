@@ -1,0 +1,71 @@
+<web-app
+        version="3.0"
+        xmlns="http://java.sun.com/xml/ns/javaee"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_3_0.xsd">
+
+	 <display-name>UndeCandCine-BE</display-name>
+	  
+	 <servlet>
+		  <servlet-name>mvc-dispatcher</servlet-name>
+		  <servlet-class> org.springframework.web.servlet.DispatcherServlet </servlet-class>
+		  <load-on-startup>1</load-on-startup>
+	 </servlet>
+	 
+	
+	 <servlet-mapping>
+		  <servlet-name>mvc-dispatcher</servlet-name>
+		  <url-pattern>/</url-pattern>
+	 </servlet-mapping>
+	
+	<context-param>
+	    <param-name>contextConfigLocation</param-name>
+	    <param-value>/WEB-INF/mvc-dispatcher-servlet*.xml</param-value>
+	</context-param>
+	
+	<context-param>
+        <param-name>log4jConfigLocation</param-name>
+        <param-value>/WEB-INF/resource/log4j.properties</param-value>
+    </context-param>
+    
+    
+  <!--   <security-constraint>
+    <web-resource-collection>
+        <web-resource-name>PRIVATE REST API</web-resource-name>
+        <url-pattern>/auth/*</url-pattern>
+        <http-method>GET</http-method>
+        <http-method>POST</http-method>
+        <http-method>HEAD</http-method>
+        <http-method>PUT</http-method>
+        <http-method>OPTIONS</http-method>
+        <http-method>TRACE</http-method>
+        <http-method>DELETE</http-method>
+    </web-resource-collection>
+    <auth-constraint>
+        <description>Have to be a USER</description>
+        <role-name>USERS</role-name>
+    </auth-constraint>
+	</security-constraint>
+	<login-config>
+	    <auth-method>BASIC</auth-method>
+	    <realm-name>userauth</realm-name>
+	</login-config>
+	<security-role>
+	    <description/>
+	    <role-name>USERS</role-name>
+	</security-role> -->
+    
+
+     <listener>
+        <listener-class>org.springframework.web.util.Log4jConfigListener</listener-class>
+    </listener>
+	
+	 <listener>
+	 	 <listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
+	 </listener>
+	 
+	 
+	 
+	 
+ 
+</web-app>
