@@ -7,7 +7,7 @@
   <groupId>com.trademarket.multimodule</groupId>
   <artifactId>trademarket-parent</artifactId>
   <packaging>pom</packaging>
-  <version>1.0</version>
+  <version>1.1</version>
   <name>Trade Market API</name>
   
   <modules>

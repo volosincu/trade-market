@@ -48,19 +48,19 @@
       <dependency>
           <groupId>com.trademarket.multimodule</groupId>
           <artifactId>trademarket-interfaces</artifactId>
-          <version>1.0</version>
+          <version>1.1</version>
       </dependency>
 
       <dependency>
           <groupId>com.trademarket.multimodule</groupId>
           <artifactId>trademarket-models</artifactId>
-          <version>1.0</version>
+          <version>1.1</version>
       </dependency>
 
       <dependency>
           <groupId>com.trademarket.multimodule</groupId>
           <artifactId>trademarket-services</artifactId>
-          <version>1.0</version>
+          <version>1.1</version>
       </dependency>
     
       <dependency>
