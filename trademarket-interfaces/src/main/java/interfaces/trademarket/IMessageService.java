@@ -1,5 +1,6 @@
 package interfaces.trademarket;
 
+import java.math.BigInteger;
 import models.trademarket.MessageModel;
 
 /**
@@ -10,5 +11,7 @@ public interface IMessageService {
     /**
      *
      */
-    public void processMessage(MessageModel model);
+    public void processMessage(String json) throws Exception;
+    
+    public void queryRange(Double lessThan);
 }

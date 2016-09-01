@@ -1,4 +1,4 @@
-package persistence.properties;
+package persistence.trademarket.properties;
 
 /**
  *
