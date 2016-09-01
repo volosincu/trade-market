@@ -6,12 +6,12 @@
   <parent>
     <groupId>com.trademarket.multimodule</groupId>
     <artifactId>trademarket-parent</artifactId>
-    <version>1.1</version>
+    <version>1.0</version>
   </parent>
-  <artifactId>trademarket-services</artifactId>
+  <artifactId>trademarket-persistence</artifactId>
   <packaging>jar</packaging>
   
-  <name>Trade Market Services </name>
+  <name>Trade Market Persistence </name>
   
   <build>
     <pluginManagement>
@@ -40,12 +40,6 @@
           <artifactId>trademarket-interfaces</artifactId>
           <version>1.1</version>
       </dependency>
-      
-        <dependency>
-          <groupId>com.trademarket.multimodule</groupId>
-          <artifactId>trademarket-persistence</artifactId>
-          <version>1.0</version>
-      </dependency>
     
       <dependency>
           <groupId>org.springframework</groupId>
@@ -58,8 +52,13 @@
           <artifactId>spring-core</artifactId>
           <version>4.3.2.RELEASE</version>
       </dependency>
-
-    
+      
+      <dependency>
+          <groupId>org.mongodb</groupId>
+          <artifactId>mongo-java-driver</artifactId>
+           <version>3.3.0</version>    
+      </dependency>
+       
   </dependencies>
 </project>
 

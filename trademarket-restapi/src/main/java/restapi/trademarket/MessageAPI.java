@@ -2,8 +2,11 @@ package restapi.trademarket;
 
 
 import interfaces.trademarket.IMessageService;
+import java.math.BigInteger;
+import models.trademarket.MessageModel;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
@@ -31,6 +34,14 @@ public class MessageAPI  {
     public @ResponseBody ResponseEntity<String> postAMessage(@PathVariable(value = "name")  final String name) {
         
         logger.info("entering post message ".concat(name));
+        
+            MessageModel model = new MessageModel();
+            model.setUserId(new BigInteger("42122352252"));
+            model.setCurrencyFrom("RO");
+            model.setCurrencyTo("JP");
+            
+            messageService.processMessage(model);
+            
         
         return new ResponseEntity<String>("a response after message was proccessed", HttpStatus.OK); 
         

@@ -15,6 +15,7 @@
     <module>trademarket-interfaces</module>
     <module>trademarket-services</module>
     <module>trademarket-models</module>
+    <module>trademarket-persistence</module>
   </modules>
   
   <build>
@@ -63,18 +64,6 @@
       <artifactId>commons-lang</artifactId>
       <version>2.6</version>
     </dependency>
-        
-    <dependency>
-      <groupId>com.fasterxml.jackson.core</groupId>
-      <artifactId>jackson-databind</artifactId>
-      <version>2.5.0</version>
-    </dependency>
-
-    <dependency>
-      <groupId>commons-codec</groupId>
-      <artifactId>commons-codec</artifactId>
-      <version>1.9</version>
-    </dependency>
-        
+       
   </dependencies>
 </project>
