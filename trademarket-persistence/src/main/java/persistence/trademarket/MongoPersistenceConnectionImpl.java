@@ -2,6 +2,7 @@ package persistence.trademarket;
 
 import persistence.trademarket.properties.MongoPropertiesBean;
 import com.mongodb.MongoClient;
+import com.mongodb.MongoClientURI;
 import com.mongodb.client.MongoDatabase;
 
 import org.apache.log4j.Logger;
@@ -40,7 +41,8 @@ public class MongoPersistenceConnectionImpl implements IPersistenceConnection {
             if (config.getHost().equals("localhost")) {
                 mongoClient = new MongoClient(config.getHost());
             } else {
-                mongoClient = new MongoClient(this.buildURI(config));
+                mongoClient = new MongoClient(
+                        new MongoClientURI(this.buildURI(config)));
             }
             db = mongoClient.getDatabase(this.config.getDatabase());
         }
@@ -57,6 +59,8 @@ public class MongoPersistenceConnectionImpl implements IPersistenceConnection {
         url.append(config.getHost()).append(":");
         url.append(config.getPort()).append("/");
         url.append(config.getDatabase());
+        
+        logger.info(" ========================================  " + url.toString());
         
         return url.toString();
     }
