@@ -8,7 +8,6 @@ import java.util.logging.Level;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpEntity;
-import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
@@ -23,7 +22,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
  * *
  * @author bogdan.volosincu
  */
-@CrossOrigin(origins = "https://volosincu.github.io")
+@CrossOrigin(origins = {"http://localhost:8000", "https://volosincu.github.io"})
 @Controller
 public class MessageAPI {
 
@@ -53,18 +52,18 @@ public class MessageAPI {
      */
     @RequestMapping(value = "/message", method = RequestMethod.GET)
     public @ResponseBody
-    ResponseEntity<String> findMessagesAfterDate(@RequestParam("gte") final Double gte) {
+    ResponseEntity<List<BasicDBObject>> findMessagesAfterDate(@RequestParam("gte") final Double gte) {
 
         logger.info("entering find message after date  " + gte);
 
         if (gte == null) {
-            return new ResponseEntity<String>(this.checkIfNull(gte).toString(), HttpStatus.OK);
+            return new ResponseEntity<List<BasicDBObject>>(this.checkIfNull(gte), HttpStatus.OK);
         }
 
         List<BasicDBObject> messages = messageService.queryMessageAfterDate(gte);
         logger.info("sending response : ".concat(messages.toString()));
         
-        return new ResponseEntity<String>(messages.toString(), HttpStatus.OK);
+        return new ResponseEntity<List<BasicDBObject>>(messages, HttpStatus.OK);
 
     }
 
