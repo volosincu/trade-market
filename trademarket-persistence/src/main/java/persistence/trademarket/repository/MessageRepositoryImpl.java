@@ -66,21 +66,21 @@ public class MessageRepositoryImpl implements IRepository {
 
     /**
      *
-     * @param greaterThan<Double>
+     * @param userId<String>
      * @return iterator <MongoCursor>
      */
     @Override
-    public BasicDBObject find(final String id) {
+    public MongoCursor find(final String userId) {
 
         logger.info("entering find (by id) method");
 
-        BasicDBObject query = new BasicDBObject("userId", id);
-        BasicDBObject dbObj = persistenceConnection.getDatabase()
-                .getCollection("messages", BasicDBObject.class).find(query).first();
+        BasicDBObject query = new BasicDBObject("userId", userId);
+        FindIterable<BasicDBObject> iterable = persistenceConnection.getDatabase()
+                .getCollection("messages", BasicDBObject.class).find(query);
         
-        logger.info("QUERY object with userId  : "  + id + dbObj.toString());
         
-        return dbObj;
+       MongoCursor iterator = iterable.iterator();
+        return iterator;
 
     }
 

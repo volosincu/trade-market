@@ -21,5 +21,5 @@ public interface IMessageService {
     /**
      *
      */
-    public BasicDBObject queryById(String id);
+    public List<BasicDBObject> queryByUserId(String userId);
 }

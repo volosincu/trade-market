@@ -2,6 +2,7 @@ package restapi.trademarket;
 
 import com.mongodb.BasicDBObject;
 import interfaces.trademarket.IMessageService;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Level;
 import org.apache.log4j.Logger;
@@ -32,32 +33,36 @@ public class MessageAPI {
     /**
      *
      */
-    @RequestMapping(value = "/message/{id}", method = RequestMethod.GET)
-    public @ResponseBody ResponseEntity<BasicDBObject> getAMessage(@PathVariable(value = "id") final String id) {
+    @RequestMapping(value = "message/user/{userId}", method = RequestMethod.GET)
+    public @ResponseBody
+    ResponseEntity<List<BasicDBObject>> getAMessage(@PathVariable(value = "userId") final String userId) {
 
-        logger.info("entering get message ---------------- " + id );
+        logger.info("entering get message  " + userId);
 
-        BasicDBObject message = messageService.queryById(id);
-        
-        logger.info("sending response : ".concat( message.toString()));
+        List<BasicDBObject> messages = messageService.queryByUserId(userId);
+        logger.info("sending response : ".concat(messages.toString()));
 
-        return new ResponseEntity<BasicDBObject>(message, HttpStatus.OK);
+        return new ResponseEntity<List<BasicDBObject>>(messages, HttpStatus.OK);
     }
-    
-    
+
+
      /**
      *
      */
     @RequestMapping(value = "/message", method = RequestMethod.GET)
-    public @ResponseBody ResponseEntity<String> findMessagesAfterDate(@RequestParam("gte") final Double gte) {
+    public @ResponseBody
+    ResponseEntity<String> findMessagesAfterDate(@RequestParam("gte") final Double gte) {
 
-        logger.info("entering find message after date  ");
+        logger.info("entering find message after date  " + gte);
 
-        List<BasicDBObject> messageList = messageService.queryMessageAfterDate(gte);
-        
-        logger.info("sending response : ".concat( messageList.toString()));
+        if (gte == null) {
+            return new ResponseEntity<String>(this.checkIfNull(gte).toString(), HttpStatus.OK);
+        }
 
-        return new ResponseEntity<String>(messageList.toString() ,HttpStatus.OK);
+        List<BasicDBObject> messages = messageService.queryMessageAfterDate(gte);
+        logger.info("sending response : ".concat(messages.toString()));
+
+        return new ResponseEntity<String>(messages.toString(), HttpStatus.OK);
 
     }
 
@@ -80,6 +85,25 @@ public class MessageAPI {
         }
         return new ResponseEntity<String>("", HttpStatus.OK);
 
+    }
+    
+    /**
+     * Make sure url is correct. Ex:  /message/user/{userId}  |  /message?gte={timestamp}
+     * 
+     * @param value
+     * @return List<BasicDBObject> 
+     */
+    private List<BasicDBObject> checkIfNull(Object value) {
+        List<BasicDBObject> messages = null;
+        
+        if(value == null){
+            messages = new ArrayList<>();
+            BasicDBObject errormsg = new BasicDBObject(
+                    "error message", "Make sure resource path is correct. /message?gte={timestamp}");
+            messages.add(errormsg);
+        }
+        
+        return messages;
     }
 
 }

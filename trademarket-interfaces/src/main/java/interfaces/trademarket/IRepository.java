@@ -12,7 +12,7 @@ public interface IRepository {
     /**
      *
      */
-    public BasicDBObject find(String id);
+    public MongoCursor find(String userId);
 
     /**
      *
