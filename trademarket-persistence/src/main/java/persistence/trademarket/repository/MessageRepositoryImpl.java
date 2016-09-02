@@ -1,7 +1,7 @@
 /*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
+     * To change this license header, choose License Headers in Project Properties.
+     * To change this template file, choose Tools | Templates
+     * and open the template in the editor.
  */
 package persistence.trademarket.repository;
 
@@ -39,7 +39,7 @@ public class MessageRepositoryImpl implements IRepository {
 
         MongoCollection<BasicDBObject> collection = persistenceConnection.getDatabase().getCollection("messages", BasicDBObject.class);
         collection.insertOne(message);
-        
+
         logger.info("leaving persist method");
     }
 
@@ -62,6 +62,26 @@ public class MessageRepositoryImpl implements IRepository {
 
         MongoCursor iterator = iterable.iterator();
         return iterator;
+    }
+
+    /**
+     *
+     * @param greaterThan<Double>
+     * @return iterator <MongoCursor>
+     */
+    @Override
+    public BasicDBObject find(final String id) {
+
+        logger.info("entering find (by id) method");
+
+        BasicDBObject query = new BasicDBObject("userId", id);
+        BasicDBObject dbObj = persistenceConnection.getDatabase()
+                .getCollection("messages", BasicDBObject.class).find(query).first();
+        
+        logger.info("QUERY object with userId  : "  + id + dbObj.toString());
+        
+        return dbObj;
+
     }
 
 }

@@ -1,6 +1,5 @@
 package models.trademarket;
 
-import java.math.BigInteger;
 import java.util.Date;
 import java.util.Objects;
 
@@ -12,7 +11,7 @@ import java.util.Objects;
 public class MessageModel  {
     
     
-    private BigInteger userId;
+    private String userId;
     private String currencyFrom;
     private String currencyTo;
 
@@ -23,14 +22,13 @@ public class MessageModel  {
     private String originatingCountry;
     private Long timestampPlaced;
 
-    public BigInteger getUserId() {
+    public String getUserId() {
         return userId;
     }
 
-    public void setUserId(BigInteger userId) {
+    public void setUserId(String userId) {
         this.userId = userId;
     }
-
     
     public String getCurrencyFrom() {
         return currencyFrom;
@@ -99,15 +97,15 @@ public class MessageModel  {
     @Override
     public int hashCode() {
         int hash = 3;
-        hash = 53 * hash + Objects.hashCode(this.userId);
-        hash = 53 * hash + Objects.hashCode(this.currencyFrom);
-        hash = 53 * hash + Objects.hashCode(this.currencyTo);
-        hash = 53 * hash + Objects.hashCode(this.amountSell);
-        hash = 53 * hash + Objects.hashCode(this.amountBuy);
-        hash = 53 * hash + Objects.hashCode(this.rate);
-        hash = 53 * hash + Objects.hashCode(this.timePlaced);
-        hash = 53 * hash + Objects.hashCode(this.originatingCountry);
-        hash = 53 * hash + Objects.hashCode(this.timestampPlaced);
+        hash = 61 * hash + Objects.hashCode(this.userId);
+        hash = 61 * hash + Objects.hashCode(this.currencyFrom);
+        hash = 61 * hash + Objects.hashCode(this.currencyTo);
+        hash = 61 * hash + Objects.hashCode(this.amountSell);
+        hash = 61 * hash + Objects.hashCode(this.amountBuy);
+        hash = 61 * hash + Objects.hashCode(this.rate);
+        hash = 61 * hash + Objects.hashCode(this.timePlaced);
+        hash = 61 * hash + Objects.hashCode(this.originatingCountry);
+        hash = 61 * hash + Objects.hashCode(this.timestampPlaced);
         return hash;
     }
 
@@ -123,6 +121,9 @@ public class MessageModel  {
             return false;
         }
         final MessageModel other = (MessageModel) obj;
+        if (!Objects.equals(this.userId, other.userId)) {
+            return false;
+        }
         if (!Objects.equals(this.currencyFrom, other.currencyFrom)) {
             return false;
         }
@@ -130,9 +131,6 @@ public class MessageModel  {
             return false;
         }
         if (!Objects.equals(this.originatingCountry, other.originatingCountry)) {
-            return false;
-        }
-        if (!Objects.equals(this.userId, other.userId)) {
             return false;
         }
         if (!Objects.equals(this.amountSell, other.amountSell)) {

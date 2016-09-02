@@ -12,11 +12,16 @@ public interface IRepository {
     /**
      *
      */
-    public void persist(BasicDBObject message);
+    public BasicDBObject find(String id);
 
     /**
      *
      */
     public MongoCursor find(Double greaterThan);
+
+    /**
+     *
+     */
+    public void persist(BasicDBObject message);
 
 }

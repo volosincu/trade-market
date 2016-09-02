@@ -6,6 +6,7 @@ package services.trademarket;
 import com.mongodb.BasicDBObject;
 import com.mongodb.client.MongoCursor;
 import com.mongodb.util.JSON;
+import com.mongodb.util.JSONParseException;
 import interfaces.trademarket.IMessageService;
 import models.trademarket.MessageModel;
 import org.apache.log4j.Logger;
@@ -21,7 +22,6 @@ import java.util.List;
 import java.util.Locale;
 import org.apache.commons.lang.StringUtils;
 
-
 @Component
 public class MessageServiceImpl implements IMessageService {
 
@@ -31,19 +31,18 @@ public class MessageServiceImpl implements IMessageService {
     IRepository messageRepository;
 
     /**
-     * The param greater than is a timestamp parsed to a Double (number) 
+     * The param greater than is a timestamp parsed to a Double (number)
      *
      * @param greaterThan<Double>
      * @return List<BasicDBObject>
      */
     @Override
-    public List<BasicDBObject> queryRange(final Double greaterThan) {
+    public List<BasicDBObject> queryMessageAfterDate(final Double after) {
         List<BasicDBObject> messageList = new ArrayList<>();
 
         //TODO to not affect performance send dirrectly BasicDBObject
         //final MessageModel model = this.convertToMessageModel(message);
-        
-        MongoCursor cursor = messageRepository.find(greaterThan);
+        MongoCursor cursor = messageRepository.find(after);
         while (cursor.hasNext()) {
             BasicDBObject dbmessage = (BasicDBObject) cursor.next();
             messageList.add(dbmessage);
@@ -55,22 +54,39 @@ public class MessageServiceImpl implements IMessageService {
 
     /**
      *
+     * @param id<String>
+     */
+    @Override
+    public BasicDBObject queryById(final String id) {
+        BasicDBObject obj = messageRepository.find(id);
+        return obj;
+    }
+
+    /**
+     *
      * @param json<String>
      */
     @Override
     public void processMessage(String json) throws Exception {
         logger.info("entering processMessage  JSON ".concat(json));
-
-        final BasicDBObject message = (BasicDBObject) JSON.parse(json);
-
+        
+        BasicDBObject message;
+        try {
+            message = (BasicDBObject) JSON.parse(json);
+        } catch (JSONParseException e) {
+            logger.error(e.getMessage());
+            throw new Exception("Invalid JSON.");
+        }
         Boolean valid = validateRequiredFields(message);
         if (!valid) {
-            throw new Exception("Not a valid input.");
+            logger.error("Required Fields missing.");
+            throw new Exception("Not a valid input. Required Fields missing.");
         }
 
         String date = String.valueOf(message.get("timePlaced"));
         Date timeplaced = new SimpleDateFormat("dd-MMM-yy HH:mm:ss", Locale.UK).parse(date);
         message.append("timestampPlaced", timeplaced.getTime());
+        message.replace("userId", (String) message.get("userId")); // save id as a String 
 
         messageRepository.persist(message);
     }
@@ -105,7 +121,7 @@ public class MessageServiceImpl implements IMessageService {
      */
     private MessageModel convertToMessageModel(BasicDBObject message) throws ParseException {
 
-        BigInteger userid = new BigInteger((String) message.get("userId"));
+        String userid = (String) message.get("userId");
         String currencyfrom = String.valueOf(message.get("currencyFrom"));
         String currencyto = String.valueOf(message.get("currencyTo"));
         Double amountbuy = Double.parseDouble(String.valueOf(message.get("amountBuy")));

@@ -12,6 +12,14 @@ public interface IMessageService {
      *
      */
     public void processMessage(String json) throws Exception;
-    
-    public List<BasicDBObject> queryRange(Double greaterThan);
+
+    /**
+     *
+     */
+    public List<BasicDBObject> queryMessageAfterDate(Double afterDate);
+
+    /**
+     *
+     */
+    public BasicDBObject queryById(String id);
 }
