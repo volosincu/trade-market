@@ -7,7 +7,6 @@ import com.mongodb.client.MongoDatabase;
 import org.apache.log4j.Logger;
 import interfaces.trademarket.IPersistenceConnection;
 import org.springframework.stereotype.Component;
-import org.springframework.stereotype.Repository;
 
 /**
  * @author bvolosincu
@@ -34,11 +33,18 @@ public class MongoPersistenceConnectionImpl implements IPersistenceConnection {
     public MongoDatabase getDatabase() {
 
         if (mongoClient == null) {
-            mongoClient = new MongoClient("localhost");
+
+            /**
+             * TODO remove this check 
+             */
+            if (config.getHost().equals("localhost")) {
+                mongoClient = new MongoClient(config.getHost());
+            } else {
+                mongoClient = new MongoClient(this.buildURI(config));
+            }
             db = mongoClient.getDatabase(this.config.getDatabase());
-            //mongoClient = new MongoClient(this.buildURI(config));
         }
-        
+
         return db;
     }
     
