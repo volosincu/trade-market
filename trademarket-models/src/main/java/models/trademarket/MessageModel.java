@@ -21,7 +21,7 @@ public class MessageModel  {
     private Double rate;
     private Date timePlaced;
     private String originatingCountry;
-    private String timestampPlaced;
+    private Long timestampPlaced;
 
     public BigInteger getUserId() {
         return userId;
@@ -88,26 +88,26 @@ public class MessageModel  {
         this.originatingCountry = originatingCountry;
     }
 
-    public String getTimestampPlaced() {
+    public Long getTimestampPlaced() {
         return timestampPlaced;
     }
 
-    public void setTimestampPlaced(String timestampPlaced) {
+    public void setTimestampPlaced(Long timestampPlaced) {
         this.timestampPlaced = timestampPlaced;
     }
 
     @Override
     public int hashCode() {
         int hash = 3;
-        hash = 59 * hash + Objects.hashCode(this.userId);
-        hash = 59 * hash + Objects.hashCode(this.currencyFrom);
-        hash = 59 * hash + Objects.hashCode(this.currencyTo);
-        hash = 59 * hash + Objects.hashCode(this.amountSell);
-        hash = 59 * hash + Objects.hashCode(this.amountBuy);
-        hash = 59 * hash + Objects.hashCode(this.rate);
-        hash = 59 * hash + Objects.hashCode(this.timePlaced);
-        hash = 59 * hash + Objects.hashCode(this.originatingCountry);
-        hash = 59 * hash + Objects.hashCode(this.timestampPlaced);
+        hash = 53 * hash + Objects.hashCode(this.userId);
+        hash = 53 * hash + Objects.hashCode(this.currencyFrom);
+        hash = 53 * hash + Objects.hashCode(this.currencyTo);
+        hash = 53 * hash + Objects.hashCode(this.amountSell);
+        hash = 53 * hash + Objects.hashCode(this.amountBuy);
+        hash = 53 * hash + Objects.hashCode(this.rate);
+        hash = 53 * hash + Objects.hashCode(this.timePlaced);
+        hash = 53 * hash + Objects.hashCode(this.originatingCountry);
+        hash = 53 * hash + Objects.hashCode(this.timestampPlaced);
         return hash;
     }
 
@@ -132,9 +132,6 @@ public class MessageModel  {
         if (!Objects.equals(this.originatingCountry, other.originatingCountry)) {
             return false;
         }
-        if (!Objects.equals(this.timestampPlaced, other.timestampPlaced)) {
-            return false;
-        }
         if (!Objects.equals(this.userId, other.userId)) {
             return false;
         }
@@ -150,6 +147,9 @@ public class MessageModel  {
         if (!Objects.equals(this.timePlaced, other.timePlaced)) {
             return false;
         }
+        if (!Objects.equals(this.timestampPlaced, other.timestampPlaced)) {
+            return false;
+        }
         return true;
     }
 
@@ -157,5 +157,7 @@ public class MessageModel  {
     public String toString() {
         return "MessageModel{" + "userId=" + userId + ", currencyFrom=" + currencyFrom + ", currencyTo=" + currencyTo + ", amountSell=" + amountSell + ", amountBuy=" + amountBuy + ", rate=" + rate + ", timePlaced=" + timePlaced + ", originatingCountry=" + originatingCountry + ", timestampPlaced=" + timestampPlaced + '}';
     }
+
+
     
 }

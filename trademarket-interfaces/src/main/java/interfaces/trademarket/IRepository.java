@@ -1,23 +1,22 @@
 package interfaces.trademarket;
 
 import com.mongodb.BasicDBObject;
-import java.math.BigInteger;
-import models.trademarket.MessageModel;
+import com.mongodb.client.MongoCursor;
 
 /**
  *
  * @author bogdan.volosincu
  */
 public interface IRepository {
-    
-        /**
-     *
-     */
-    public Boolean persist(BasicDBObject message);
+
     /**
      *
      */
-    public String find(Double id);
+    public void persist(BasicDBObject message);
 
-    
+    /**
+     *
+     */
+    public MongoCursor find(Double greaterThan);
+
 }

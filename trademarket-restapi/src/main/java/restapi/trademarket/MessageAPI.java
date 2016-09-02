@@ -4,6 +4,7 @@ import com.mongodb.BasicDBObject;
 import com.mongodb.util.JSON;
 import interfaces.trademarket.IMessageService;
 import java.math.BigInteger;
+import java.util.List;
 import java.util.logging.Level;
 import models.trademarket.MessageModel;
 import org.apache.log4j.Logger;
@@ -35,13 +36,15 @@ public class MessageAPI {
      */
     @RequestMapping(value = "/message/{lt}", method = RequestMethod.GET)
     public @ResponseBody
-    ResponseEntity<String> getAMessage(@PathVariable(value = "lt") final Double lessThan) {
+    ResponseEntity<List<BasicDBObject>> getAMessage(@PathVariable(value = "lt") final Double lessThan) {
 
-        logger.info("entering post message ");
+        logger.info("entering get message ");
 
-        messageService.queryRange(lessThan);
+        List<BasicDBObject> messageList = messageService.queryRange(lessThan);
+        
+        logger.info("sending response : ".concat( messageList.toString()));
 
-        return new ResponseEntity<String>("a response after message was proccessed", HttpStatus.OK);
+        return new ResponseEntity<List<BasicDBObject>>(messageList, HttpStatus.OK);
 
     }
 

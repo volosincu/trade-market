@@ -11,14 +11,10 @@ import com.mongodb.client.MongoCollection;
 import com.mongodb.client.MongoCursor;
 import interfaces.trademarket.IPersistenceConnection;
 import interfaces.trademarket.IRepository;
-import java.math.BigInteger;
-import java.util.HashMap;
-import models.trademarket.MessageModel;
 import org.apache.log4j.Logger;
 import org.bson.Document;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
-import persistence.trademarket.MongoPersistenceConnectionImpl;
 
 /**
  *
@@ -34,39 +30,38 @@ public class MessageRepositoryImpl implements IRepository {
 
     /**
      *
+     * @param message<BasicDBObject>
+     * @return boolean
      */
     @Override
-    public Boolean persist(final BasicDBObject message) {
+    public void persist(final BasicDBObject message) {
         logger.info("entering persist method");
 
         MongoCollection<BasicDBObject> collection = persistenceConnection.getDatabase().getCollection("messages", BasicDBObject.class);
         collection.insertOne(message);
         
         logger.info("leaving persist method");
-        return false;
     }
 
     /**
      *
+     * @param greaterThan<Double>
+     * @return iterator <MongoCursor>
      */
     @Override
-    public String find(final Double lessThan) {
-        
-          logger.info("entering find method");
-        
-              FindIterable<BasicDBObject> iterable = persistenceConnection.getDatabase().getCollection("messages", BasicDBObject.class).find(
+    public MongoCursor find(final Double greaterThan) {
+
+        logger.info("entering find method");
+
+        FindIterable<BasicDBObject> iterable = persistenceConnection.getDatabase().getCollection("messages", BasicDBObject.class).find(
                 new Document()
                 .append("timestampPlaced", new Document()
-                        .append("$lte", lessThan)
+                        .append("$gte", greaterThan)
                 )
         );
-              MongoCursor cursor = iterable.iterator();
-              while (cursor.hasNext()) {
-	BasicDBObject o = (BasicDBObject) cursor.next();
-                     System.out.println(o.get("originatingCountry"));
-              }
-        
-        return "";
+
+        MongoCursor iterator = iterable.iterator();
+        return iterator;
     }
 
 }

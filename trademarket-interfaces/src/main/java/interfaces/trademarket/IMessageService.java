@@ -1,7 +1,7 @@
 package interfaces.trademarket;
 
-import java.math.BigInteger;
-import models.trademarket.MessageModel;
+import com.mongodb.BasicDBObject;
+import java.util.List;
 
 /**
  * @author bogdan.volosincu
@@ -13,5 +13,5 @@ public interface IMessageService {
      */
     public void processMessage(String json) throws Exception;
     
-    public void queryRange(Double lessThan);
+    public List<BasicDBObject> queryRange(Double greaterThan);
 }

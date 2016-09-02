@@ -4,6 +4,7 @@
 package services.trademarket;
 
 import com.mongodb.BasicDBObject;
+import com.mongodb.client.MongoCursor;
 import com.mongodb.util.JSON;
 import interfaces.trademarket.IMessageService;
 import models.trademarket.MessageModel;
@@ -14,9 +15,12 @@ import interfaces.trademarket.IRepository;
 import java.math.BigInteger;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 import java.util.Locale;
 import org.apache.commons.lang.StringUtils;
+
 
 @Component
 public class MessageServiceImpl implements IMessageService {
@@ -27,17 +31,31 @@ public class MessageServiceImpl implements IMessageService {
     IRepository messageRepository;
 
     /**
+     * The param greater than is a timestamp parsed to a Double (number) 
      *
-     * @param lessThan
+     * @param greaterThan<Double>
+     * @return List<BasicDBObject>
      */
     @Override
-    public void queryRange(final Double lessThan) {
-        messageRepository.find(lessThan);
+    public List<BasicDBObject> queryRange(final Double greaterThan) {
+        List<BasicDBObject> messageList = new ArrayList<>();
+
+        //TODO to not affect performance send dirrectly BasicDBObject
+        //final MessageModel model = this.convertToMessageModel(message);
+        
+        MongoCursor cursor = messageRepository.find(greaterThan);
+        while (cursor.hasNext()) {
+            BasicDBObject dbmessage = (BasicDBObject) cursor.next();
+            messageList.add(dbmessage);
+            logger.info(dbmessage.get("originatingCountry") + "  " + dbmessage.get("timestampPlaced") + "  " + dbmessage.getString("timePlaced"));
+        }
+
+        return messageList;
     }
 
     /**
      *
-     * @param json
+     * @param json<String>
      */
     @Override
     public void processMessage(String json) throws Exception {
@@ -50,18 +68,18 @@ public class MessageServiceImpl implements IMessageService {
             throw new Exception("Not a valid input.");
         }
 
-        final MessageModel model = fromBasicDBObject(message);
-        message.append("timestampPlaced", model.getTimestampPlaced());
-
-        logger.info("MODEL toString ..... ".concat(model.toString()));
+        String date = String.valueOf(message.get("timePlaced"));
+        Date timeplaced = new SimpleDateFormat("dd-MMM-yy HH:mm:ss", Locale.UK).parse(date);
+        message.append("timestampPlaced", timeplaced.getTime());
 
         messageRepository.persist(message);
     }
 
     /**
+     * Checks if the required flelds of a message are not blank or null
      *
-     * @param  BasicDBObject
-     * @return isValid
+     * @param input<BasicDBObject>
+     * @return boolean
      */
     public boolean validateRequiredFields(final BasicDBObject input) {
         String[] required_keys = {"userId", "currencyFrom", "currencyTo", "amountSell", "amountBuy", "rate", "timePlaced", "originatingCountry"};
@@ -80,13 +98,13 @@ public class MessageServiceImpl implements IMessageService {
 
         return true;
     }
-    
+
     /**
      *
      * @param BasicDBObject
      */
-    private MessageModel fromBasicDBObject (BasicDBObject message) throws ParseException {
-        
+    private MessageModel convertToMessageModel(BasicDBObject message) throws ParseException {
+
         BigInteger userid = new BigInteger((String) message.get("userId"));
         String currencyfrom = String.valueOf(message.get("currencyFrom"));
         String currencyto = String.valueOf(message.get("currencyTo"));
@@ -99,7 +117,7 @@ public class MessageServiceImpl implements IMessageService {
         String originatingcountry = String.valueOf(message.get("originatingCountry"));
 
 //       String newstring = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss.S").format(date);
-       final MessageModel model = new MessageModel();
+        final MessageModel model = new MessageModel();
         model.setUserId(userid);
         model.setCurrencyFrom(currencyfrom);
         model.setCurrencyTo(currencyto);
@@ -108,8 +126,7 @@ public class MessageServiceImpl implements IMessageService {
         model.setRate(rate);
         model.setTimePlaced(timeplaced);
         model.setOriginatingCountry(originatingcountry);
-        
-        
+
         return model;
     }
 
