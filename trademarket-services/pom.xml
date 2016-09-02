@@ -6,7 +6,7 @@
   <parent>
     <groupId>com.trademarket.multimodule</groupId>
     <artifactId>trademarket-parent</artifactId>
-    <version>1.1</version>
+    <version>1.2</version>
   </parent>
   <artifactId>trademarket-services</artifactId>
   <packaging>jar</packaging>
@@ -32,19 +32,19 @@
       <dependency>
           <groupId>com.trademarket.multimodule</groupId>
           <artifactId>trademarket-models</artifactId>
-          <version>1.1</version>
+          <version>1.2</version>
       </dependency>
 
       <dependency>
           <groupId>com.trademarket.multimodule</groupId>
           <artifactId>trademarket-interfaces</artifactId>
-          <version>1.1</version>
+          <version>1.2</version>
       </dependency>
       
         <dependency>
           <groupId>com.trademarket.multimodule</groupId>
           <artifactId>trademarket-persistence</artifactId>
-          <version>1.0</version>
+          <version>1.1</version>
       </dependency>
     
       <dependency>
