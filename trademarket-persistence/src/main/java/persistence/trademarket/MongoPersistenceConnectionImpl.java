@@ -60,7 +60,6 @@ public class MongoPersistenceConnectionImpl implements IPersistenceConnection {
         url.append(config.getPort()).append("/");
         url.append(config.getDatabase());
         
-        logger.info(" ========================================  " + url.toString());
         
         return url.toString();
     }
