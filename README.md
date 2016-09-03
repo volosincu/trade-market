@@ -11,7 +11,6 @@
  <h2> Frontend</h2>
  <p> The frontend component is in a separate project located <a href="https://github.com/volosincu/trade-market-ui.github.io"> here </a>.</p>
 
-<img alt=" " class="" data-original-src="//support.cdn.mozilla.net/media/uploads/gallery/images/2015-10-16-20-31-16-059641.png" src="//support.cdn.mozilla.net/media/uploads/gallery/images/2015-10-16-20-31-16-059641.png" title="">
 
 
  <hr />
