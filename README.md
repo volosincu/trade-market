@@ -2,9 +2,10 @@
 
 
 <h4><a href="https://volosincu.github.io/trade-market-ui.github.io/#">link demo</a></h4>
- <p> !!!  Important   newer versions of browsers  block requests with <code>mixed content</code>. Please disable this feature for viewieng the demo.</p>
+ <p> !!!  Important   newer versions of browsers  block requests with <code>mixed content</code>. </p>
+<p>Please disable this feature for viewieng the demo. (this is bcause frontend app his hosted on <code>github pages</code> and doesn't have have https enabled)</p>
 
-<p>Chrome : disable mixed content <code>In the address bar at the right end should be a 'shield' icon, you can click on that to run insecure content.</code></p>
+<p>Chrome : <code>In the address bar at the right end should be a 'shield' icon, you can click on that to run insecure content.</code></p>
 <p>Firefox : <code><a href="https://support.mozilla.org/en-US/kb/mixed-content-blocking-firefox#w_unblock-mixed-content"> how to disable mixed content </a></code></p>
  
  <h2> Frontend</h2>
