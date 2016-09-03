@@ -17,14 +17,18 @@
         <security:user  name="client" password="alfanum123" authorities="ROLE_USER" />
     </security:user-service>
     
-   
+    
+    
+    
     <security:http pattern="/*" create-session="stateless" realm="trademessage" request-matcher="ant">
         <security:csrf disabled="true" />
-               
+         <security:cors />
+         
         <security:intercept-url pattern="/*" access="hasRole('ROLE_USER')" method="POST" />
         <security:http-basic entry-point-ref="" />
     </security:http>
     
+      
     
 
 </beans>

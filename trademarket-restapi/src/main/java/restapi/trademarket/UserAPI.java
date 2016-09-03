@@ -21,7 +21,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
  * *
  * @author bogdan.volosincu
  */
-@CrossOrigin(origins = "https://volosincu.github.io")
+@CrossOrigin(origins = "*")
 @Controller
 public class UserAPI {
 
