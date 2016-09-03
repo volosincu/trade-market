@@ -12,7 +12,6 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -31,26 +30,13 @@ public class MessageAPI {
     @Autowired
     private IMessageService messageService;
 
-    /**
-     *
-     */
-    @RequestMapping(value = "message/user/{userId}", method = RequestMethod.GET)
-    public @ResponseBody
-    ResponseEntity<List<BasicDBObject>> getAMessage(@PathVariable(value = "userId") final String userId) {
-
-        logger.info("entering get message  " + userId);
-
-        List<BasicDBObject> messages = messageService.queryByUserId(userId);
-        logger.info("sending response : ".concat(messages.toString()));
-
-        return new ResponseEntity<List<BasicDBObject>>(messages, HttpStatus.OK);
-    }
-
-
      /**
-     *
+      * @desc find all messages with timePlaced after @param gte
+      * 
+      * @param gte<Double>
+      * @return <List<BasicDBObject>>
      */
-    @RequestMapping(value = "/message", method = RequestMethod.GET)
+    @RequestMapping(value = "/messages", method = RequestMethod.GET)
     public @ResponseBody
     ResponseEntity<List<BasicDBObject>> findMessagesAfterDate(@RequestParam("gte") final Double gte) {
 
@@ -68,9 +54,12 @@ public class MessageAPI {
     }
 
     /**
-     *
+     * @param httpEntity <HttpEntity<String>>
+     * @desc create a anew message; 
+     *  
+     * @return <String>
      */
-    @RequestMapping(value = "/message", method = RequestMethod.POST)
+    @RequestMapping(value = "/messages", method = RequestMethod.POST)
     public @ResponseBody ResponseEntity<String> postAMessage(final HttpEntity<String> httpEntity) {
 
         logger.info("entering post message ");
@@ -91,7 +80,7 @@ public class MessageAPI {
     /**
      * Make sure url is correct. Ex:  /message/user/{userId}  |  /message?gte={timestamp}
      * 
-     * @param value
+     * @param value<Object>
      * @return List<BasicDBObject> 
      */
     private List<BasicDBObject> checkIfNull(Object value) {
