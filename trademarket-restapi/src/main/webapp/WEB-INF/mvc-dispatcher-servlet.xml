@@ -10,25 +10,26 @@
                                http://www.springframework.org/schema/mvc
                                http://www.springframework.org/schema/mvc/spring-mvc-4.3.xsd">
 
-    <!--<context:annotation-config />-->     
+ 
     <mvc:annotation-driven />
     <context:component-scan base-package="services, restapi, persistence" />
     
     <bean id="messageService" class="services.trademarket.MessageServiceImpl"></bean>
-
     <bean id="messageRepository" class="persistence.trademarket.repository.MessageRepositoryImpl"></bean>
                 
     
-        
-    <!-- TODO  read properties from properties file  -->
-    <!--<bean class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">-->
+    <bean class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
+        <property name="location">
+            <value>classpath:mongodb.config.properties</value>
+        </property>
+    </bean>
         
     <bean id="mongoConfig" class="persistence.trademarket.properties.MongoPropertiesBean">
-        <property name="username" value="vbogdan" />
-        <property name="password" value="s1mpl3password" />
-        <property name="host" value="ds017776.mlab.com"/>
-        <property name="port" value="17776" />
-        <property name="database" value="icurencyfair" />
+        <property name="username" value="${username}" />
+        <property name="password" value="${password}" />
+        <property name="host" value="${host}"/>
+        <property name="port" value="${port}" />
+        <property name="database" value="${database}" />
     </bean>
         
     <bean id="persistenceConnection" class="persistence.trademarket.MongoPersistenceConnectionImpl">
