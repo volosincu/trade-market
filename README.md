@@ -1,12 +1,11 @@
+# trade-market 
 
 
-<h1> # trade-market </h1>
+<h4><a href="https://volosincu.github.io/trade-market-ui.github.io/#">link demo</a></h4>
+ <p> !!!  Important   newer versions of browsers  block requests with <code>mixed content</code>. Please disable this feature for viewieng the demo.</p>
 
-<h4><a href="https://volosincu.github.io/trade-market-ui.github.io/#">Demo</a></h4>
- <h5> !!!  Important   newer versions of browsers  block requests with mixed content. Please disable this feature for viewieng the demo.</h5>
-
-Chrome : disable mixed content <code>In the address bar at the right end should be a 'shield' icon, you can click on that to run insecure content.</code>
-Firefox : <code><a href="https://support.mozilla.org/en-US/kb/mixed-content-blocking-firefox#w_unblock-mixed-content"> how to disable mixed content </a></code>
+<p>Chrome : disable mixed content <code>In the address bar at the right end should be a 'shield' icon, you can click on that to run insecure content.</code></p>
+<p>Firefox : <code><a href="https://support.mozilla.org/en-US/kb/mixed-content-blocking-firefox#w_unblock-mixed-content"> how to disable mixed content </a></code></p>
  
  <h2> Frontend</h2>
  <p> The frontend component is in a separate project located <a href="https://github.com/volosincu/trade-market-ui.github.io"> here </a>.</p>
