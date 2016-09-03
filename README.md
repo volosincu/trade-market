@@ -1,8 +1,10 @@
 
+
  # trade-market
  
  <h2> Frontend</h2>
  <p> The frontend component is in a separate project located <a href="https://github.com/volosincu/trade-market-ui.github.io"> here </a>.</p>
+
  <br />
  <hr />
  <br />
@@ -25,6 +27,7 @@
                 <li> - the exchange amountBuy must match the product (amountSell * rate) </li>
                 <li> *<code> used RoundingMode.HALF_UP for(amountSell * rate) and amountBuy </code></li>
             </ul>
+
      </li>
  </ul>
 
@@ -52,13 +55,13 @@
         </tr>
 
         <tr>
-            <td>/messages </td>
+            <td>/messages?gte={timestamp} </td>
             <td><code>  get </code>  </td>
             <td>(no)</td>
         </tr>
 
         <tr>
-            <td>/messages </td>
+            <td>/users/{userId}/messages </td>
             <td><code> get </code> </td>
             <td>(no)</td>
         </tr>
@@ -74,15 +77,16 @@
 
 
 
-<code>
-
-</code>
-
 
 <code>
 
 </code>
 
+
 <code>
 
 </code>
+
+<code>
+
+
