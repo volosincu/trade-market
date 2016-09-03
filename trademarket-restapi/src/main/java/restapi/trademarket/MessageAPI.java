@@ -4,7 +4,6 @@ import com.mongodb.BasicDBObject;
 import interfaces.trademarket.IMessageService;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.logging.Level;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpEntity;
@@ -12,7 +11,6 @@ import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -22,7 +20,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
  * *
  * @author bogdan.volosincu
  */
-@CrossOrigin(origins = "*")
+//@CrossOrigin(origins = "https://volosincu.github.io")
 @Controller
 public class MessageAPI {
 
@@ -52,7 +50,7 @@ public class MessageAPI {
         }
         
         HttpHeaders headers = new HttpHeaders();
-        headers.setAccessControlAllowOrigin("*");
+        headers.setAccessControlAllowOrigin("https://volosincu.github.io");
         
         return new ResponseEntity<List<BasicDBObject>>(response, headers, HttpStatus.OK);
 
@@ -80,7 +78,7 @@ public class MessageAPI {
         }
         
          HttpHeaders headers = new HttpHeaders();
-        headers.setAccessControlAllowOrigin("*");
+        headers.setAccessControlAllowOrigin("https://volosincu.github.io");
         
         return new ResponseEntity<String>("", headers, HttpStatus.OK);
 
