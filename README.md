@@ -3,6 +3,7 @@
 
 <h4><a href="https://volosincu.github.io/trade-market-ui.github.io/#">link demo</a></h4>
  <p> *NOTE :  newer versions of browsers  block requests with <code>mixed content</code>. </p>
+
 <p>Please disable this feature for viewieng the demo. (this is bcause frontend app his hosted on <code>github pages</code> and doesn't have have https enabled)</p>
 
 <p>Chrome : <code>In the address bar at the right end should be a 'shield' icon, you can click on that to run insecure content.</code></p>
@@ -10,7 +11,6 @@
  
  <h2> Frontend</h2>
  <p> The frontend component is in a separate project located <a href="https://github.com/volosincu/trade-market-ui.github.io"> here </a>.</p>
-
 
 
  <hr />
