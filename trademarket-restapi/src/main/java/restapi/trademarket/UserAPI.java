@@ -35,7 +35,7 @@ public class UserAPI {
       * @param gte<String>
       * @return <List<BasicDBObject>>
      */
-    @RequestMapping(value = "users/{userId}/messages", method = RequestMethod.GET)
+    @RequestMapping(value = "/users/{userId}/messages", method = RequestMethod.GET)
     public @ResponseBody
     ResponseEntity<List<BasicDBObject>> getAMessage(@PathVariable(value = "userId") final String userId) {
 
