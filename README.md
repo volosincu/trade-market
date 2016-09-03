@@ -42,8 +42,7 @@
              </ul>
          </div>
      </li>
-     
-     <li> - application hosted on Heroku (<code>currency-fair</code> branch deployed) </li>
+      <li> - application hosted on Heroku (<code>currency-fair</code> branch deployed) </li>
  </ul>
 
 
