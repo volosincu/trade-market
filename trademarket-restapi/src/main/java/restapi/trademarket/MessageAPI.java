@@ -7,7 +7,6 @@ import java.util.List;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpEntity;
-import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
@@ -21,11 +20,11 @@ import org.springframework.web.bind.annotation.ResponseBody;
  * *
  * @author bogdan.volosincu
  */
+@CrossOrigin(origins = {"http://localhost:8000", "https://volosincu.github.io"})
 @Controller
 public class MessageAPI {
 
     private static final Logger logger = Logger.getLogger(MessageAPI.class);
-    
 
     @Autowired
     private IMessageService messageService;
@@ -36,7 +35,6 @@ public class MessageAPI {
       * @param gte<Double>
       * @return <List<BasicDBObject>>
      */
-    @CrossOrigin(origins = "https://volosincu.github.io")
     @RequestMapping(value = "/messages", method = RequestMethod.GET)
     public @ResponseBody
     ResponseEntity<List<BasicDBObject>> findMessagesAfterDate(@RequestParam("gte") final Double gte) {
@@ -49,11 +47,7 @@ public class MessageAPI {
             response = messageService.queryMessageAfterDate(gte);
             logger.info("sending response : ".concat(response.toString()));
         }
-        
-        HttpHeaders headers = new HttpHeaders();
-        headers.setAccessControlAllowOrigin("https://volosincu.github.io");
-        
-        return new ResponseEntity<List<BasicDBObject>>(response, headers, HttpStatus.OK);
+        return new ResponseEntity<List<BasicDBObject>>(response, HttpStatus.OK);
 
     }
 
@@ -77,11 +71,7 @@ public class MessageAPI {
            logger.error(ex.getMessage(), ex);
             return new ResponseEntity<String>(ex.getMessage(), HttpStatus.BAD_REQUEST);
         }
-        
-         HttpHeaders headers = new HttpHeaders();
-        headers.setAccessControlAllowOrigin("https://volosincu.github.io");
-        
-        return new ResponseEntity<String>("", headers, HttpStatus.OK);
+        return new ResponseEntity<String>("", HttpStatus.OK);
 
     }
     
