@@ -42,14 +42,13 @@ public class MessageAPI {
 
         logger.info("entering find message after date  " + gte);
 
-        if (gte == null) {
-            return new ResponseEntity<List<BasicDBObject>>(this.checkIfNull(gte), HttpStatus.OK);
-        }
-
-        List<BasicDBObject> messages = messageService.queryMessageAfterDate(gte);
-        logger.info("sending response : ".concat(messages.toString()));
+        List<BasicDBObject> response = this.nullCheckRequestParam(gte);
         
-        return new ResponseEntity<List<BasicDBObject>>(messages, HttpStatus.OK);
+        if (response == null) {
+            response = messageService.queryMessageAfterDate(gte);
+            logger.info("sending response : ".concat(response.toString()));
+        }
+        return new ResponseEntity<List<BasicDBObject>>(response, HttpStatus.OK);
 
     }
 
@@ -68,9 +67,9 @@ public class MessageAPI {
 
         try {
             messageService.processMessage(json);
-
+            
         } catch (Exception ex) {
-            java.util.logging.Logger.getLogger(MessageAPI.class.getName()).log(Level.SEVERE, null, ex);
+           logger.error(ex.getMessage(), ex);
             return new ResponseEntity<String>(ex.getMessage(), HttpStatus.BAD_REQUEST);
         }
         return new ResponseEntity<String>("", HttpStatus.OK);
@@ -83,7 +82,7 @@ public class MessageAPI {
      * @param value<Object>
      * @return List<BasicDBObject> 
      */
-    private List<BasicDBObject> checkIfNull(Object value) {
+    private List<BasicDBObject> nullCheckRequestParam(Object value) {
         List<BasicDBObject> messages = null;
         
         if(value == null){
