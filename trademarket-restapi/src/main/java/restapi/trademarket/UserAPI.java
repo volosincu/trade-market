@@ -5,6 +5,7 @@ import interfaces.trademarket.IMessageService;
 import java.util.List;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
@@ -44,7 +45,10 @@ public class UserAPI {
         List<BasicDBObject> messages = messageService.queryByUserId(userId);
         logger.info("sending response : ".concat(messages.toString()));
 
-        return new ResponseEntity<List<BasicDBObject>>(messages, HttpStatus.OK);
+         HttpHeaders headers = new HttpHeaders();
+        headers.setAccessControlAllowOrigin("https://volosincu.github.io");
+        
+        return new ResponseEntity<List<BasicDBObject>>(messages, headers, HttpStatus.OK);
     }
     
 }
