@@ -11,6 +11,7 @@ import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -20,7 +21,6 @@ import org.springframework.web.bind.annotation.ResponseBody;
  * *
  * @author bogdan.volosincu
  */
-//@CrossOrigin(origins = "https://volosincu.github.io")
 @Controller
 public class MessageAPI {
 
@@ -36,6 +36,7 @@ public class MessageAPI {
       * @param gte<Double>
       * @return <List<BasicDBObject>>
      */
+    @CrossOrigin(origins = "https://volosincu.github.io")
     @RequestMapping(value = "/messages", method = RequestMethod.GET)
     public @ResponseBody
     ResponseEntity<List<BasicDBObject>> findMessagesAfterDate(@RequestParam("gte") final Double gte) {
