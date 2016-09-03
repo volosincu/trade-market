@@ -19,7 +19,7 @@
      <li> - Validation </li>
      <li>
            <div>
-                    <ul>
+                    <ul id="validation">
                         <li> - input must be a valid <code>JSON</code></li>
                         <li> - all fields are required </li>
                         <li> - type checking on fields </li>
@@ -28,7 +28,16 @@
                     </ul>
             </div>
      </li>
-     <li> </li>
+     <li> - save data in mongoDB  (free hosting plan from mLab)</li>
+     <li> 
+         <div> 
+             <ul  id="mongodb">
+                 <li> <code>url</code> - <code> mongodb://currency:fair@ds021026.mlab.com:21026/icurrencyfair</code> </li>
+             </ul>
+         </div>
+     </li>
+     
+     <li> - application hosted on Heroku (<code>currency-fair</code> branch deployed) </li>
  </ul>
 
 
@@ -68,25 +77,32 @@
     </tbody>
 </table>
 
-
+<h5>Example : </h5>
+<ul>
+    <li><code><a href="http://icurrencyfair.herokuapp.com/messages">http://icurrencyfair.herokuapp.com/messages</a></code></li>
+    <li><code><a href="http://icurrencyfair.herokuapp.com/messages?gte=1472307967043">http://icurrencyfair.herokuapp.com/messages?gte=1472307967043</a></code></li>
+    <li><code><a href="http://icurrencyfair.herokuapp.com/user/58522695/messages">http://icurrencyfair.herokuapp.com/user/58522695/messages</a></code></li>
+</ul>
 
  <br />
  <hr />
  <br />
  
+ 
+ <h2>Testing</h2>
+ 
+ <p>Run the file <code>test-endpoint.sh</code> that  calls the endpoint and prints in console the response. </p>
+ <ul>
+     <li><code>./test-endpoint.sh client alfanum123  http://icurrencyfair.herokuapp.com/messages</code></li>
+     <li><code> curl -G http://icurrencyfair.herokuapp.com/messages?gte=1472307967043 | jq </code></li>
+     <li><code>.curl -G http://icurrencyfair.herokuapp.com/users/2333212/messages  | jq </code></li>
+ </ul>
+ 
+ * <code><a href="https://stedolan.github.io/jq/">jq</a></code>  - command-line JSON processor 
 
 
-
-
-<code>
-
-</code>
-
-
-<code>
-
-</code>
-
-<code>
-
-
+ <br />
+ <hr />
+ <br />
+  <br />
+   <br />
