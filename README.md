@@ -2,9 +2,9 @@
 
 
 <h4><a href="https://volosincu.github.io/trade-market-ui.github.io/#">link demo</a></h4>
- <p> *NOTE :  newer versions of browsers  block requests with <code>mixed content</code>. </p>
+ <p> *NOTE :  newer versions of browsers  block requests with <code>mixed content</code>.  </p>
   
-  
+  <img src="https://support.cdn.mozilla.net/media/uploads/gallery/images/2015-10-16-20-31-16-059641.png" />
   
 <p>Please disable this feature for viewieng the demo. (this is bcause frontend app his hosted on <code>github pages</code> and doesn't have have https enabled)</p>
 
