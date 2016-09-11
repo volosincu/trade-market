@@ -21,7 +21,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
  * *
  * @author bogdan.volosincu
  */
-@CrossOrigin(origins = {"http://localhost:8000", "https://volosincu.github.io"})
+@CrossOrigin(origins = {"http://localhost:8000", "http://trade-market-ui.herokuapp.com", "https://trade-market-ui.herokuapp.com" })
 @Controller
 public class MessageAPI {
 
